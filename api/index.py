@@ -7,11 +7,6 @@ from pydantic import BaseModel
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 
 
-@app.get("/api/healthchecker")
-def healthchecker():
-    return {"status": "success", "message": "Integrate FastAPI Framework with Next.js"}
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -36,17 +31,17 @@ class TodoItem(BaseModel):
     completed: bool
 
 
-# Define the TodoItem model
+
 class TodoItem(BaseModel):
     id: int
     title: str
     completed: bool
 
 
-# In-memory storage for todo items
-todos = []
 
-# Route to create a new todo item
+todos : TodoItem= []
+
+
 
 
 @app.post("/api/todos")
