@@ -1,25 +1,44 @@
-# Integrate FastAPI Framework with Next.js and Deploy
+# Talking PDF
 
-In this article, you will learn how to seamlessly integrate a FastAPI project into your Next.js application and deploy the entire project on Vercel. But that's not all! We won't stop at integration; we will take it a step further by building a simple Todo application.
+**Talking PDF** is an AI Assistant designed to discuss, teach lessons, and analyze PDF files. This tool leverages advanced natural language processing to interact with PDF content in a meaningful way, making it a powerful tool for education, research, and more.
 
-![Integrate FastAPI Framework with Next.js and Deploy](https://codevoweb.com/wp-content/uploads/2023/06/Integrate-FastAPI-Framework-with-Next.js-and-Deploy.webp)
+## Features
 
-## Topics Covered
+- **Discuss PDF Files:** Engage in a conversation about the contents of any PDF.
+- **Teach Lessons:** Break down complex topics within a PDF into simpler, digestible lessons.
+- **Analyze Documents:** Analyze and summarize research papers, legal documents, and more.
 
-- Running the FastAPI and Next.js Projects
-- Setup the FastAPI and Next.js Projects
-    - Bootstrap the Next.js Project
-    - Setup the FastAPI Project
-    - Proxy Requests from Next.js to the FastAPI App
-    - Run the Projects in Development
-- Deploy the Projects to Vercel
-- Create a CRUD API with FastAPI
-- Create a CRUD App with Next.js
-    - Manage the Application State with Zustand
-    - Create the Todo Form Component
-    - Create the Todo Item Component
-    - Render the Components in a Page File
-- Re-deploy the Project to Vercel
-- Conclusion
+## Getting Started
 
-Read the entire article here: [https://codevoweb.com/integrate-fastapi-framework-with-nextjs-and-deploy/](https://codevoweb.com/integrate-fastapi-framework-with-nextjs-and-deploy/)
+### Prerequisites
+
+Make sure you have the following tools installed:
+
+1. **pipx:** Install pipx if it's not available on your system.
+   ```bash
+   python -m pip install --user pipx
+   python -m pipx ensurepath
+
+2. Poetry: Install Poetry if it's not available on your system
+pipx install poetry
+
+3. git clone https://github.com/yourusername/talking-pdf.git
+   cd talking-pdf
+
+4. Install frontend dependencies:
+    npm install
+5. Set up the API:
+    cd api
+    poetry install
+
+Run the application:
+    npm run dev
+
+
+Usage
+Once the setup is complete, you can start interacting with the AI assistant. Simply upload your PDF, and the assistant will help you discuss, analyze, or learn from the document.
+
+Contributing
+Contributions are welcome! If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+
