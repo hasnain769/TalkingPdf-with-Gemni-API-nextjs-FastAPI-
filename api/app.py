@@ -13,8 +13,8 @@ import google.generativeai as genai
 # Load environment variables from .env file
 load_dotenv()
 
-genai.configure(api_key="your Key")
-# Upload the file and print a confirmatxxxxxxxxxxxxxx
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+# Upload the file and print a confirmat
 
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 
