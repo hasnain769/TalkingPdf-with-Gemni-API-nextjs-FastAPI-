@@ -18,68 +18,68 @@ export default function Component() {
   return (
     <div className="flex min-h-[100dvh] flex-col w-full overflow-x-hidden">
       <header className="bg-background w-full px-4 py-3 shadow-sm md:px-6 lg:px-8">
-  <div className="max-w-screen-xl mx-auto flex items-center justify-between overflow-hidden">
-    <Link href="#" className="flex items-center text-primary" prefetch={false}>
-      <Image
-        src={logo}
-        height={50}
-        width={50}
-        alt="Chat with Pdf"
-        className="h-auto w-auto" // Ensures the logo maintains its aspect ratio
-      />
-      {/* <span className="ml-2 text-xl font-bold">Chat with PDF</span>  */}
-    </Link>
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between overflow-hidden">
+          <Link href="#" className="flex items-center text-primary" prefetch={false}>
+            <Image
+              src={logo}
+              height={50}
+              width={50}
+              alt="Chat with Pdf"
+              className="h-auto w-auto" // Ensures the logo maintains its aspect ratio
+            />
+            {/* <span className="ml-2 text-xl font-bold">Chat with PDF</span>  */}
+          </Link>
 
-    {/* Mobile Menu Icon */}
-    <div className="md:hidden">
-      <button onClick={toggleMenu} className="text-primary">
-        {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-      </button>
-    </div>
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-primary">
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
 
-    {/* Desktop Menu */}
-    <nav className="hidden space-x-7 md:flex">
-      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Home
-      </Link>
-      <Link href="/play-ground" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Play ground
-      </Link>
-      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Pricing
-      </Link>
-      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Contact
-      </Link>
-    </nav>
-    <Link href="/play-ground"className="hidden md:inline-block bg-black text-white rounded-md">
-    <Button variant="default" >
-      Get Started
-    </Button>
-    </Link>
-  </div>
+          {/* Desktop Menu */}
+          <nav className="hidden space-x-7 md:flex">
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Home
+            </Link>
+            <Link href="/play-ground" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Play ground
+            </Link>
+            <Link href="/chat" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Chat with AI
+            </Link>
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Pricing
+            </Link>
+          </nav>
+          <Link href="/play-ground" className="hidden md:inline-block bg-black text-white rounded-md">
+            <Button variant="default" >
+              Get Started
+            </Button>
+          </Link>
+        </div>
 
-  {/* Mobile Menu */}
-  {menuOpen && (
-    <div className="md:hidden mt-2 bg-background shadow-lg rounded-lg p-4 space-y-2">
-      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Home
-      </Link>
-      <Link href="/play-ground" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Play ground
-      </Link>
-      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Pricing
-      </Link>
-      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-        Contact
-      </Link>
-      <Button variant="default" className="w-full bg-black text-white">
-        Get Started
-      </Button>
-    </div>
-  )}
-</header>
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden mt-2 bg-background shadow-lg rounded-lg p-4 space-y-2">
+            <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Home
+            </Link>
+            <Link href="/play-ground" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Play ground
+            </Link>
+            <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Pricing
+            </Link>
+            <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Contact
+            </Link>
+            <Button variant="default" className="w-full bg-black text-white">
+              Get Started
+            </Button>
+          </div>
+        )}
+      </header>
       <main className="flex-1">
         <section className="bg-background py-12 md:py-24 lg:py-32">
           <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 md:gap-12 lg:px-8">

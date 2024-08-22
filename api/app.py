@@ -48,6 +48,7 @@ async def upload_pdf(name: str = Form(...), file: UploadFile = File(...), sessio
         pdf_entry = PDFFile(name=name, file=file_content)
         session.add(pdf_entry)
         session.commit()
+        session.close()
         return {"message": "File uploaded successfully", "id": pdf_entry.id}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -63,6 +64,7 @@ async def download_pdf(pdf_id: UUID, session: Session = Depends(get_session)):
 async def get_pdfs(session: Session = Depends(get_session)):
     try:
         pdf_files = session.query(PDFFile).all()
+        session.close()
         return [{"id": pdf.id, "name": pdf.name} for pdf in pdf_files]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -74,6 +76,7 @@ async def delete_pdf(pdf_id: UUID, session: Session = Depends(get_session)):
         raise HTTPException(status_code=404, detail="PDF not found")
     session.delete(pdf_file)
     session.commit()
+    session.close()
     return {"detail": "PDF deleted successfully"}
 
 @app.websocket("/api/ws")
@@ -101,6 +104,7 @@ async def websocket_endpoint(websocket: WebSocket):
         session = next(get_session())
         statement = select(PDFFile).where(PDFFile.id == UUID(pdf_id))
         pdf_file = session.exec(statement).first()
+        session.close()
 
         if not pdf_file:
             print("pdf not found")

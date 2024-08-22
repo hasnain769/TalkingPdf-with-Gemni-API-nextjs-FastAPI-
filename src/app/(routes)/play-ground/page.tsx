@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
+import Router from "next/router";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -17,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatDistanceToNow } from "date-fns"; // For formatting upload date
 import ChatWindowScreen from "@/app/screens/chatWindow";
-import { ChevronRightIcon, ChevronLeftIcon ,DoorOpen ,MoveHorizontalIcon ,  BrainCircuit } from "lucide-react";
+import { ChevronRightIcon, ChevronLeftIcon, DoorOpen, MoveHorizontalIcon, BrainCircuit } from "lucide-react";
 import Link from "next/link";
 
 export default function page() {
@@ -26,6 +27,7 @@ export default function page() {
   const [selectedPdfId, setId] = useState<any>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile sidebar toggle
   const fileInputRef = useRef<any>(null);
+
 
   useEffect(() => {
     const getpdf = async () => {
@@ -96,6 +98,7 @@ export default function page() {
         // Clear selected PDF if it was deleted
         if (selectedPdf === `/api/pdfs/${pdfId}`) {
           setSelectedPdf(null);
+          
         }
       } else {
         console.error("Failed to delete PDF", response.statusText);
@@ -115,123 +118,121 @@ export default function page() {
 
   return (
     <>
-    
-    <div className="bg-black w-full h-auto flex items-center text-white py-5 px-10 border-b-2 border-s-gray-200 gap-x-3">
-  <BrainCircuit height={30} width={30} />
-  <span className="flex items-center font-semibold">Play Ground</span>
-  <Link href="/" className="ml-auto text-white ">
-  <DoorOpen height={50} width={40}  />
-  </Link>
-</div>
 
-    <div className="flex flex-col lg:flex-row h-screen w-full">
-      {/* Sidebar toggle button for mobile */}
-      <div className="lg:hidden fixed right-0 top-13 z-20 p-2">
-        <Button
-          variant="outline"
-          onClick={toggleSidebar}
-          className="flex items-center"
-        >
-          {sidebarOpen ? (
-            <ChevronRightIcon className="h-6 w-6" />
-          ) : (
-            <ChevronLeftIcon className="h-6 w-6" />
-          )}
-        </Button>
+      <div className="bg-black w-full h-auto flex items-center text-white  py-2 lg:py-5 px-10 border-b-2 border-s-gray-200 gap-x-3">
+        <BrainCircuit height={30} width={30} />
+        <span className="flex items-center font-semibold">Play Ground</span>
+        <Link href="/" className="ml-auto text-white ">
+          <DoorOpen height={50} width={40} />
+        </Link>
       </div>
 
-      {/* Right Column for Upload and PDF List */}
-      <div
-        className={`${
-          sidebarOpen ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 fixed lg:static right-0 top-0 lg:top-auto lg:right-auto h-full lg:h-auto w-64 lg:w-auto   border-s-black lg:border-2 bg-white shadow-lg lg:shadow-none transform transition-transform duration-300 ease-in-out z-10 lg:z-auto`}
-      >
-        <div className="p-4 border-l overflow-auto h-full w-auto">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold">Your PDFs</h2>
-            <Button variant="outline" onClick={handleUploadClick}>
-              <UploadIcon className="mr-2 h-4 w-4" />
-              Upload PDF
-            </Button>
-            <input
-              type="file"
-              accept="application/pdf"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-          </div>
-          <ul>
-            {pdfListItem.length > 0 ? (
-              pdfListItem.map((pdf: any) => (
-                <li
-                  key={pdf.id}
-                  onClick={() => handlePdfClick(pdf.id)}
-                  className={`p-2 mb-2 cursor-pointer rounded-md ${
-                    selectedPdf === `/api/pdfs/${pdf.id}`
-                      ? "bg-blue-100"
-                      : "hover:bg-gray-100"
-                  }`}
-                >
-                  <div className="flex items-center justify-between pt-4">
-                    <div className="flex items-center gap-2">
-                      <FileIcon className="h-5 w-5 text-blue-500" />
-                      <span className="font-medium text-gray-800">
-                        {pdf.name}
-                      </span>
-                    </div>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <MoveHorizontalIcon className="h-5 w-5" />
-                          <span className="sr-only">Actions</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white">
-                        <DropdownMenuItem onClick={() => handlePdfClick(pdf.id)}>
-                          View
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => handleDownloadPdf(pdf.id)}
-                        >
-                          Download
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => handleDeletePdf(pdf.id)}
-                        >
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </li>
-              ))
+      <div className="flex flex-col lg:flex-row h-screen w-full">
+        {/* Sidebar toggle button for mobile */}
+        <div className="lg:hidden fixed right-0 top-13 z-20 p-2">
+          <Button
+            variant="outline"
+            onClick={toggleSidebar}
+            className="flex items-center"
+          >
+            {sidebarOpen ? (
+              <ChevronRightIcon className="h-6 w-6" />
             ) : (
-              <div className="text-gray-500">No PDFs uploaded yet.</div>
+              <ChevronLeftIcon className="h-6 w-6" />
             )}
-          </ul>
+          </Button>
         </div>
+
+        {/* Right Column for Upload and PDF List */}
+        <div
+          className={`${sidebarOpen ? "translate-x-0" : "translate-x-full"
+            } lg:translate-x-0 fixed lg:static right-0 top-0 lg:top-auto lg:right-auto h-full lg:h-auto w-64 lg:w-auto   border-s-black lg:border-2 bg-white shadow-lg lg:shadow-none transform transition-transform duration-300 ease-in-out z-10 lg:z-auto`}
+        >
+          <div className="p-4 border-l overflow-auto h-full w-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Your PDFs</h2>
+              <Button variant="outline" onClick={handleUploadClick}>
+                <UploadIcon className="mr-2 h-4 w-4" />
+                Upload PDF
+              </Button>
+              <input
+                type="file"
+                accept="application/pdf"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+            </div>
+            <ul>
+              {pdfListItem.length > 0 ? (
+                pdfListItem.map((pdf: any) => (
+                  <li
+                    key={pdf.id}
+                    onClick={() => handlePdfClick(pdf.id)}
+                    className={`p-2 mb-2 cursor-pointer rounded-md ${selectedPdf === `/api/pdfs/${pdf.id}`
+                        ? "bg-blue-100"
+                        : "hover:bg-gray-100"
+                      }`}
+                  >
+                    <div className="flex items-center justify-between pt-4">
+                      <div className="flex items-center gap-2">
+                        <FileIcon className="h-5 w-5 text-blue-500" />
+                        <span className="font-medium text-gray-800">
+                          {pdf.name}
+                        </span>
+                      </div>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <MoveHorizontalIcon className="h-5 w-5" />
+                            <span className="sr-only">Actions</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="bg-white">
+                          <DropdownMenuItem onClick={() => handlePdfClick(pdf.id)}>
+                            View
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleDownloadPdf(pdf.id)}
+                          >
+                            Download
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleDeletePdf(pdf.id)}
+                          >
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <div className="text-gray-500">No PDFs uploaded yet.</div>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex flex-col lg:flex-row h-full w-full">
+          {selectedPdf && (
+            <div className="flex h-2/5 lg:w-1/2 p-4 lg:h-full w-full border-r-gray-300   lg:border-2">
+              <iframe
+                src={selectedPdf}
+                className="w-full h-full border"
+                title="PDF Viewer"
+              />
+            </div>
+          )}
+          {selectedPdf && (
+            <div className="h-3/5 lg:h-full p-4 lg:w-1/2 w-full">
+              <ChatWindowScreen pdf_id={selectedPdfId} />
+            </div>
+          )}
+        </div>
+
       </div>
-
-      {/* Main Content */}
-      <div className="flex flex-col lg:flex-row h-full w-full">
-  {selectedPdf && (
-    <div className="flex h-2/5 lg:w-1/2 p-4 lg:h-full w-full border-r-gray-300   lg:border-2">
-      <iframe
-        src={selectedPdf}
-        className="w-full h-full border"
-        title="PDF Viewer"
-      />
-    </div>
-  )}
-  {selectedPdf && (
-    <div className="h-3/5 lg:h-full p-4 lg:w-1/2 w-full">
-      <ChatWindowScreen pdf_id={selectedPdfId} />
-    </div>
-  )}
-</div>
-
-    </div>
     </>
   );
 }
