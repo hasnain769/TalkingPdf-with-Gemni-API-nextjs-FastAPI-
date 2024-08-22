@@ -1,33 +1,85 @@
+"use client";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; // Assuming you're using lucide-react for icons
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import p from "@/assets/a_picture_for_my_website_landing_page_website_chat_with_pdf_functionality_its_a_interactive_playground_for_chating_with_pdf_with_ai.jpeg"
+import p from "@/assets/file (1).png";
+import p2 from "@/assets/a_picture_for_my_website_landing_page_website_chat_with_pdf_functionality_its_a_interactive_playground_for_chating_with_pdf_with_ai.jpeg"
+import logo from "@/assets/l2.png"
 export default function Component() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <div className="flex min-h-[100dvh] flex-col">
-      <header className="bg-background px-4 py-3 shadow-sm md:px-6 lg:px-8">
-        <div className="container mx-auto flex items-center justify-between">
-          <Link href="#" className="text-xl font-bold text-primary" prefetch={false}>
-            Chat with PDF
-          </Link>
-          <nav className="hidden space-x-4 md:flex">
-            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-              Home
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-              Features
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-              Pricing
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
-              Contact
-            </Link>
-          </nav>
-          <Button>Get Started</Button>
-        </div>
-      </header>
+    <div className="flex min-h-[100dvh] flex-col w-full overflow-x-hidden">
+      <header className="bg-background w-full px-4 py-3 shadow-sm md:px-6 lg:px-8">
+  <div className="max-w-screen-xl mx-auto flex items-center justify-between overflow-hidden">
+    <Link href="#" className="flex items-center text-primary" prefetch={false}>
+      <Image
+        src={logo}
+        height={50}
+        width={50}
+        alt="Chat with Pdf"
+        className="h-auto w-auto" // Ensures the logo maintains its aspect ratio
+      />
+      {/* <span className="ml-2 text-xl font-bold">Chat with PDF</span>  */}
+    </Link>
+
+    {/* Mobile Menu Icon */}
+    <div className="md:hidden">
+      <button onClick={toggleMenu} className="text-primary">
+        {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+    </div>
+
+    {/* Desktop Menu */}
+    <nav className="hidden space-x-7 md:flex">
+      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Home
+      </Link>
+      <Link href="/play-ground" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Play ground
+      </Link>
+      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Pricing
+      </Link>
+      <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Contact
+      </Link>
+    </nav>
+    <Link href="/play-ground"className="hidden md:inline-block bg-black text-white rounded-md">
+    <Button variant="default" >
+      Get Started
+    </Button>
+    </Link>
+  </div>
+
+  {/* Mobile Menu */}
+  {menuOpen && (
+    <div className="md:hidden mt-2 bg-background shadow-lg rounded-lg p-4 space-y-2">
+      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Home
+      </Link>
+      <Link href="/play-ground" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Play ground
+      </Link>
+      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Pricing
+      </Link>
+      <Link href="#" className="block text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+        Contact
+      </Link>
+      <Button variant="default" className="w-full bg-black text-white">
+        Get Started
+      </Button>
+    </div>
+  )}
+</header>
       <main className="flex-1">
         <section className="bg-background py-12 md:py-24 lg:py-32">
           <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 md:gap-12 lg:px-8">
@@ -39,15 +91,17 @@ export default function Component() {
                 Unlock the power of your PDFs with our intuitive chat interface. Ask questions, get answers, and explore
                 your documents like never before.
               </p>
-              <Button>Try it Now</Button>
+              <Button variant="destructive" className="bg-black text-white">
+                Try it Now
+              </Button>
             </div>
             <div className="relative">
               <Image
-                src={p}
+                src={p2}
                 width={800}
                 height={600}
                 alt="PDF Chat"
-                className="mx-auto rounded-lg shadow-lg"
+                className="mx-auto rounded-lg "
                 style={{ aspectRatio: "800/600", objectFit: "cover" }}
               />
             </div>
@@ -56,12 +110,12 @@ export default function Component() {
         <section className="bg-muted py-12 md:py-24 lg:py-32">
           <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 md:gap-12 lg:px-8">
             <div className="relative">
-              <img
-                src="/placeholder.svg"
+              <Image
+                src={p}
                 width={800}
                 height={600}
                 alt="PDF Features"
-                className="mx-auto rounded-lg shadow-lg"
+                className="mx-auto rounded-lg "
                 style={{ aspectRatio: "800/600", objectFit: "cover" }}
               />
             </div>
@@ -87,7 +141,9 @@ export default function Component() {
                   Seamless collaboration features
                 </li>
               </ul>
-              <Button>Learn More</Button>
+              <Button variant="default" className="bg-black text-white">
+                Learn More
+              </Button>
             </div>
           </div>
         </section>
@@ -98,10 +154,10 @@ export default function Component() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-function CheckIcon(props : any) {
+function CheckIcon(props: any) {
   return (
     <svg
       {...props}
@@ -117,5 +173,5 @@ function CheckIcon(props : any) {
     >
       <path d="M20 6 9 17l-5-5" />
     </svg>
-  )
+  );
 }
