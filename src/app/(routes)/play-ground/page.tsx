@@ -21,7 +21,7 @@ import ChatWindowScreen from "@/app/screens/chatWindow";
 import { ChevronRightIcon, ChevronLeftIcon, DoorOpen, MoveHorizontalIcon, BrainCircuit } from "lucide-react";
 import Link from "next/link";
 
-export default function page() {
+export default function Page() {
   const [pdfListItem, setPdfList] = useState<any | []>([]);
   const [selectedPdf, setSelectedPdf] = useState<any>(null);
   const [selectedPdfId, setId] = useState<any>(null);
