@@ -49,3 +49,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# next-video
+videos/*
+!videos/*.json
+!videos/*.js
+!videos/*.ts
+public/_next-video

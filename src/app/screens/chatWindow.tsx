@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import ReactMarkdown from 'react-markdown';
-export default function ChatWindowScreen() {
+
+export default function ChatWindowScreen(  pdf_id?: any ) {
+  console.log(pdf_id)
   const ws = useRef<WebSocket | null>(null);
   const [messages, setMessages] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -15,6 +17,13 @@ export default function ChatWindowScreen() {
 
     ws.current.onopen = () => {
       console.log('Connected to WebSocket');
+      
+      // Send the pdf_id immediately after the connection is established
+      if (pdf_id) {
+        const message = JSON.stringify({ pdf_id: pdf_id });
+        ws.current?.send(message);
+        console.log('Sent pdf_id:', pdf_id);
+      }
     };
 
     ws.current.onmessage = (event) => {
@@ -35,7 +44,7 @@ export default function ChatWindowScreen() {
         ws.current.close();
       }
     };
-  }, []);
+  }, [pdf_id]);
 
   const handleSendMessage = () => {
     if (ws.current && inputValue.trim()) {
@@ -47,7 +56,7 @@ export default function ChatWindowScreen() {
   };
 
   return (
-<div className="flex flex-col h-full max-h-screen border-r bg-muted p-4">
+    <div className="flex flex-col h-full max-h-screen border-r bg-muted p-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-medium">AI Assistant</h2>
         <Button variant="ghost" size="icon">
@@ -94,8 +103,6 @@ export default function ChatWindowScreen() {
         </Button>
       </div>
     </div>
-  
-
   );
 }
 

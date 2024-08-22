@@ -1,40 +1,107 @@
 
-import React, { useRef } from 'react';
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Textarea } from "@/components/ui/textarea"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import PdfListView from './screens/pdflist';
-import ChatWindowScreen from './screens/chatWindow';
+import Image from "next/image"
+import p from "@/assets/a_picture_for_my_website_landing_page_website_chat_with_pdf_functionality_its_a_interactive_playground_for_chating_with_pdf_with_ai.jpeg"
 export default function Component() {
-
-
   return (
-    <div className="grid h-screen w-full grid-cols-[1fr_2fr_2fr] bg-background   border-2">
-      <div>
-      <PdfListView></PdfListView>
-      </div>
-      <div>
-        <ChatWindowScreen></ChatWindowScreen>
-      </div>
-
-
-      <div className="flex flex-col p-4 overflow-auto">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-medium">PDF Viewer</h2>
-          <Button variant="outline">
-            <MaximizeIcon className="mr-2 h-4 w-4" />
-            Maximize
-          </Button>
+    <div className="flex min-h-[100dvh] flex-col">
+      <header className="bg-background px-4 py-3 shadow-sm md:px-6 lg:px-8">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link href="#" className="text-xl font-bold text-primary" prefetch={false}>
+            Chat with PDF
+          </Link>
+          <nav className="hidden space-x-4 md:flex">
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Home
+            </Link>
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Features
+            </Link>
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Pricing
+            </Link>
+            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
+              Contact
+            </Link>
+          </nav>
+          <Button>Get Started</Button>
         </div>
-        <div className="flex-1 overflow-auto" />
-      </div>
+      </header>
+      <main className="flex-1">
+        <section className="bg-background py-12 md:py-24 lg:py-32">
+          <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 md:gap-12 lg:px-8">
+            <div className="flex flex-col items-start justify-center space-y-6">
+              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                Chat with PDF
+              </h1>
+              <p className="text-muted-foreground md:text-xl">
+                Unlock the power of your PDFs with our intuitive chat interface. Ask questions, get answers, and explore
+                your documents like never before.
+              </p>
+              <Button>Try it Now</Button>
+            </div>
+            <div className="relative">
+              <Image
+                src={p}
+                width={800}
+                height={600}
+                alt="PDF Chat"
+                className="mx-auto rounded-lg shadow-lg"
+                style={{ aspectRatio: "800/600", objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        </section>
+        <section className="bg-muted py-12 md:py-24 lg:py-32">
+          <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 md:gap-12 lg:px-8">
+            <div className="relative">
+              <img
+                src="/placeholder.svg"
+                width={800}
+                height={600}
+                alt="PDF Features"
+                className="mx-auto rounded-lg shadow-lg"
+                style={{ aspectRatio: "800/600", objectFit: "cover" }}
+              />
+            </div>
+            <div className="flex flex-col items-start justify-center space-y-6">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                Powerful PDF Features
+              </h2>
+              <p className="text-muted-foreground md:text-xl">
+                Explore your PDFs like never before with our advanced features. Annotate, extract data, and collaborate
+                seamlessly.
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center">
+                  <CheckIcon className="mr-2 h-5 w-5 text-primary" />
+                  Intuitive chat interface
+                </li>
+                <li className="flex items-center">
+                  <CheckIcon className="mr-2 h-5 w-5 text-primary" />
+                  Powerful PDF annotation tools
+                </li>
+                <li className="flex items-center">
+                  <CheckIcon className="mr-2 h-5 w-5 text-primary" />
+                  Seamless collaboration features
+                </li>
+              </ul>
+              <Button>Learn More</Button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="bg-muted py-6 text-center text-muted-foreground">
+        <div className="container mx-auto px-4 md:px-6">
+          <p>&copy; 2024 Chat with PDF. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   )
 }
 
-function FileIcon(props : any) {
+function CheckIcon(props : any) {
   return (
     <svg
       {...props}
@@ -48,117 +115,7 @@ function FileIcon(props : any) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-    </svg>
-  )
-}
-
-
-function MaximizeIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-      <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-      <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-      <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-    </svg>
-  )
-}
-
-
-function MoveHorizontalIcon(props : any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="18 8 22 12 18 16" />
-      <polyline points="6 8 2 12 6 16" />
-      <line x1="2" x2="22" y1="12" y2="12" />
-    </svg>
-  )
-}
-
-
-function SendIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m22 2-7 20-4-9-9-4Z" />
-      <path d="M22 2 11 13" />
-    </svg>
-  )
-}
-
-
-function SettingsIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  )
-}
-
-
-function UploadIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="17 8 12 3 7 8" />
-      <line x1="12" x2="12" y1="3" y2="15" />
+      <path d="M20 6 9 17l-5-5" />
     </svg>
   )
 }
